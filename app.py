@@ -90,10 +90,10 @@ def receive_message():
                 print('this is postback')
                 print(user_msg)
                     
-                if '9F' in user_msg:
+                if '9F' == user_msg:
                     response_sent_text = get_ulam('9F')
                         
-                elif '14F' in user_msg:
+                elif '14F' == user_msg:
                     response_sent_text = get_ulam('14F')
 
                     send_message(recipient_id, response_sent_text)
