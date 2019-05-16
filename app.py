@@ -70,9 +70,11 @@ def receive_message():
                             
                     elif '9F' in user_msg:
                         response_sent_text = get_ulam('9F')
+                        send_message(recipient_id, response_sent_text)
                         
                     elif '14F' in user_msg:
                         response_sent_text = get_ulam('14F')
+                        send_message(recipient_id, response_sent_text)
                     else:
                         response_sent_text = 'Gusto mo bang malaman ang ulam today?'
                         buttons = [{"type": "postback", "title":"Ano meron sa 9F?", "payload": "9F"}, {"type": "postback", "title":"Ano meron sa 14F?", "payload": "14F"}]
