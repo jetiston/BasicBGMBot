@@ -21,11 +21,13 @@ bot = Bot (ACCESS_TOKEN)
 
 class Ulamentry(db.Model):
     __tablename__ = "ulam_sa_pantry"
-    id = db.Column(db.Integer, primary_key=True)
-    floor = db.Column(db.Text())
+    #id = db.Column(db.Integer, primary_key=True)
+    floor = db.Column(db.Text(), primary_key=True)
+    date = db.Column(db.Text())
     ulam = db.Column(db.Text())
 
-    def __init__(self, floor, ulam):
+    def __init__(self, floor, date, ulam):
+        self.date = date
         self.floor = floor
         self.ulam = ulam
 
@@ -54,9 +56,9 @@ def receive_message():
                     
                     if 'iamearly' in user_msg:
                         if '9F' in user_msg:
-                            input_ulam = Ulamentry('9F',user_msg.split('iamearly',1)[-1])
+                            input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
                         elif '14F' in user_msg:
-                            input_ulam = Ulamentry('14F',user_msg.split('iamearly',1)[-1])
+                            input_ulam = Ulamentry('14F', '20190516', user_msg.split('iamearly',1)[-1].strip())
 
                         try:
                             db.session.add(input_ulam)
