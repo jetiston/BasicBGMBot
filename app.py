@@ -7,7 +7,7 @@ app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 ULAM_9F = os.environ['ULAM_9F']
-ULAM_14F = os.environ['ULAM_14F']
+ULAM_14F = os.environ['ULAM_14']
 bot = Bot (ACCESS_TOKEN)
 
 #We will receive messages that Facebook sends our bot at this endpoint 
