@@ -6,6 +6,8 @@ import os
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+ULAM_9F = os.environ['ULAM_9F']
+ULAM_14F = os.environ['ULAM_14F']
 bot = Bot (ACCESS_TOKEN)
 
 #We will receive messages that Facebook sends our bot at this endpoint 
@@ -31,14 +33,14 @@ def receive_message():
                 if message['message'].get('text'):
                     user_msg = message['message'].get('text')
                     
-                    #if '9F' in user_msg:
-                        #response_sent_text = os.environ['ULAM_9F']
+                    if '9F' in user_msg:
+                        response_sent_text = ULAM_9F
                         
-                    #elif '14F' in user_msg:
-                        #response_sent_text = os.environ['ULAM_14F']
+                    elif '14F' in user_msg:
+                        response_sent_text = ULAM_14F
                         
-                    #else:
-                        #response_sent_text = 'Aw, walang foods diyan'
+                    else:
+                        response_sent_text = 'Aw, walang foods diyan'
                         
                     response_sent_text = get_message()
                     send_message(recipient_id, response_sent_text)
