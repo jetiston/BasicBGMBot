@@ -38,6 +38,14 @@ def receive_message():
                         
                     elif '14F' in user_msg:
                         response_sent_text = ULAM_14F
+                    
+                    elif 'iamearly9F' in user_msg:
+                        os.environ['ULAM_9F'] = user_msg.split("iamearly9F",1)[1]
+                        response_sent_text = 'Thanks for the info!'
+                        
+                    elif 'iamearly14F' in user_msg:
+                        os.environ['ULAM_14'] = user_msg.split("iamearly14F",1)[1]
+                        response_sent_text = 'Thanks for the info!'
                         
                     else:
                         response_sent_text = 'Aw, walang foods diyan'
