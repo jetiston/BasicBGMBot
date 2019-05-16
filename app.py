@@ -67,7 +67,8 @@ def receive_message():
                         elif '14F' in user_msg:
                             #input_ulam = Ulamentry('14F', '20190516', user_msg.split('iamearly',1)[-1].strip())
                             response_sent_text = update_ulam('14F', today, user_msg.split('iamearly',1)[-1].strip())
-                            
+                        send_message(recipient_id, response_sent_text)
+                    
                     elif '9F' in user_msg:
                         response_sent_text = get_ulam('9F')
                         send_message(recipient_id, response_sent_text)
@@ -81,7 +82,7 @@ def receive_message():
                         bot.send_button_message(recipient_id, response_sent_text, buttons)
                         
                     #response_sent_text = get_message()
-                    send_message(recipient_id, response_sent_text)
+                    
 
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
