@@ -55,19 +55,11 @@ def receive_message():
                     
                     if 'iamearly' in user_msg:
                         if '9F' in user_msg:
-                            input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
+                            #input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
+                            response_sent_text = update_ulam('9F', '20190518', user_msg.split('iamearly',1)[-1].strip())
                         elif '14F' in user_msg:
-                            input_ulam = Ulamentry('14F', '20190516', user_msg.split('iamearly',1)[-1].strip())
-
-                        try:
-                            db.session.add(input_ulam)
-                            db.session.commit()
-                        except Exception as e:
-                            print('It failed :(')
-                            print(e)
-                            sys.stdout.flush()
-
-                        response_sent_text = 'Thanks for the info!'
+                            #input_ulam = Ulamentry('14F', '20190516', user_msg.split('iamearly',1)[-1].strip())
+                            response_sent_text = update_ulam('14F', '20190518', user_msg.split('iamearly',1)[-1].strip())
                             
                     elif '9F' in user_msg:
                         response_sent_text = get_ulam('9F')
@@ -100,6 +92,21 @@ def get_ulam(floor):
     date = pantry.date
 
     reply = 'Ang ulam today(' + date + ') sa ' + floor + ' ay ' + ulam
+    return reply
+
+def update_ulam(floor, date, ulam):
+    pantry = Ulamentry.query.filter_by(floor=floor).first()
+    pantry.ulam = ulam
+    pantry.date = date
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        print('It failed :(')
+        print(e)
+        sys.stdout.flush()
+
+    reply = 'Thank you for the info!!!'
     return reply
 
 #chooses a random message to send to the user
