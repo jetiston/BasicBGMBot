@@ -54,9 +54,9 @@ def receive_message():
                     
                     if 'iamearly' in user_msg:
                         if '9F' in user_msg:
-                            input_ulam = Ulamentry('9F',user_msg.split('iamearly',1))
+                            input_ulam = Ulamentry('9F',user_msg.split('iamearly',1))[-1]
                         elif '14F' in user_msg:
-                            input_ulam = Ulamentry('14F',user_msg.split('iamearly',1))
+                            input_ulam = Ulamentry('14F',user_msg.split('iamearly',1))[-1]
 
                         try:
                             db.session.add(input_ulam)
