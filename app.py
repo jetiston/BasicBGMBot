@@ -19,6 +19,16 @@ ULAM_9F = os.environ['ULAM_9F']
 ULAM_14F = os.environ['ULAM_14']
 bot = Bot (ACCESS_TOKEN)
 
+class Ulamentry(db.Model):
+    __tablename__ = "ulam_sa_pantry"
+    id = db.Column(db.Integer, primary_key=True)
+    floor = db.Column(db.Text())
+    ulam = db.Column(db.Text())
+
+    def __init__(self, floor, ulam):
+        self.floor = floor
+        self.ulam = ulam
+
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
@@ -44,10 +54,18 @@ def receive_message():
                     
                     if 'iamearly' in user_msg:
                         if '9F' in user_msg:
-                            pass
+                            input_ulam = Ulamentry('9F',user_msg.split('iamearly',1))
                         elif '14F' in user_msg:
-                            pass
-                            
+                            input_ulam = Ulamentry('14F',user_msg.split('iamearly',1))
+
+                        try:
+                            db.session.add(input_ulam)
+                            db.session.commit()
+                        except Exception as e:
+                            print('It failed :(')
+                            print(e)
+                            sys.stdout.flush()
+
                         response_sent_text = 'Thanks for the info!'
                             
                     elif '9F' in user_msg:
