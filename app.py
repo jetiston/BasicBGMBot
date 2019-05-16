@@ -15,8 +15,7 @@ db = SQLAlchemy(app)
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
-ULAM_9F = os.environ['ULAM_9F']
-ULAM_14F = os.environ['ULAM_14']
+
 bot = Bot (ACCESS_TOKEN)
 
 class Ulamentry(db.Model):
@@ -71,10 +70,10 @@ def receive_message():
                         response_sent_text = 'Thanks for the info!'
                             
                     elif '9F' in user_msg:
-                        response_sent_text = ULAM_9F
+                        response_sent_text = get_ulam('9F')
                         
                     elif '14F' in user_msg:
-                        response_sent_text = ULAM_14F
+                        response_sent_text = get_ulam('14F')
                     else:
                         response_sent_text = 'Aw, walang foods diyan'
                         
@@ -95,6 +94,13 @@ def verify_fb_token(token_sent):
         return request.args.get("hub.challenge")
     return 'test'
 
+def get_ulam(floor):
+    pantry = Ulamentry.query.filter_by(floor=floor).first()
+    ulam = pantry.ulam
+    date = pantry.date
+
+    reply = 'Ang ulam today(' + date + ') sa ' + floor + ' ay ' + ulam
+    return reply
 
 #chooses a random message to send to the user
 def get_message():
