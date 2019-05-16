@@ -92,7 +92,8 @@ def receive_message():
                     
                 if '09F' == user_msg:
                     print('are you there?')
-                    response_sent_text = get_ulam('9F')  
+                    response_sent_text = get_ulam('9F')
+                    
                 elif '14F' == user_msg:
                     response_sent_text = get_ulam('14F')
 
