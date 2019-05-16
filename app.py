@@ -31,16 +31,16 @@ def receive_message():
                 if message['message'].get('text'):
                     user_msg = message['message'].get('text')
                     
-                    if '9F' in user_msg:
-                        response_sent_text = os.environ['ULAM_9F']
+                    #if '9F' in user_msg:
+                        #response_sent_text = os.environ['ULAM_9F']
                         
-                    elif '14F' in user_msg:
-                        response_sent_text = os.environ['ULAM_14F']
+                    #elif '14F' in user_msg:
+                        #response_sent_text = os.environ['ULAM_14F']
                         
-                    else:
-                        response_sent_text = 'Aw, walang foods diyan'
+                    #else:
+                        #response_sent_text = 'Aw, walang foods diyan'
                         
-                    #response_sent_text = get_message()
+                    response_sent_text = get_message()
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
