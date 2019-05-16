@@ -124,7 +124,7 @@ def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     buttons = [{"type": "postback", "title":"9F", "payload": "9F_ulam"}, {"type": "postback", "title":"14F", "payload": "14F_ulam"}]
-    bot.send_button(recipient_id, response, buttons)
+    bot.send_button_message(recipient_id, response, buttons)
     return "success"
 
 if __name__ == "__main__":
