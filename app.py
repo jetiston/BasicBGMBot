@@ -80,7 +80,7 @@ def receive_message():
                     send_message(recipient_id, response_sent_text)
 
                 if message['message'].get('postback'):
-                    user_msg = message['message'].get('postback')
+                    user_msg = message['message']['postback']['payload']
                     print('this is postback')
                     print(user_msg)
                     
@@ -95,7 +95,7 @@ def receive_message():
                         bot.send_button_message(recipient_id, response_sent_text, buttons)
                         
                     #response_sent_text = get_message()
-                    send_message(recipient_id, response_sent_text)
+                    send_message(recipient_id, 'it was postback')
 
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
