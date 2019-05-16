@@ -35,9 +35,9 @@ def receive_message():
                     
                     if 'iamearly' in user_msg:
                         if '9F' in user_msg:
-                            os.environ['ULAM_9F'] = user_msg.split("iamearly9F",1)[1]
+                            ULAM_9F = user_msg.split("iamearly9F",1)[1]
                         elif '14F' in user_msg:
-                            os.environ['ULAM_14'] = user_msg.split("iamearly14F",1)[1]
+                            ULAM_14F = user_msg.split("iamearly14F",1)[1]
                             
                         response_sent_text = 'Thanks for the info!'
                             
