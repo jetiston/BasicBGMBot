@@ -51,9 +51,11 @@ def receive_message():
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
+            recipient_id = message['sender']['id']
+
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
-                recipient_id = message['sender']['id']
+                
                 
                 if message['message'].get('text'):
                     user_msg = message['message'].get('text')
@@ -94,7 +96,7 @@ def receive_message():
                 elif '14F' in user_msg:
                     response_sent_text = get_ulam('14F')
 
-                    send_message(recipient_id, 'it was postback')
+                    send_message(recipient_id, response_sent_text)
 
     return "Message Processed"
 
