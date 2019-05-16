@@ -8,10 +8,14 @@ from flask_heroku import Heroku
 from pymessenger.bot import Bot
 import os 
 
+import datetime
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 heroku = Heroku(app)
 db = SQLAlchemy(app)
+
+today = datetime.date.today().strftime("%B %d, %Y")
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -56,10 +60,10 @@ def receive_message():
                     if 'iamearly' in user_msg:
                         if '9F' in user_msg:
                             #input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
-                            response_sent_text = update_ulam('9F', '20190518', user_msg.split('iamearly',1)[-1].strip())
+                            response_sent_text = update_ulam('9F', today, user_msg.split('iamearly',1)[-1].strip())
                         elif '14F' in user_msg:
                             #input_ulam = Ulamentry('14F', '20190516', user_msg.split('iamearly',1)[-1].strip())
-                            response_sent_text = update_ulam('14F', '20190518', user_msg.split('iamearly',1)[-1].strip())
+                            response_sent_text = update_ulam('14F', today, user_msg.split('iamearly',1)[-1].strip())
                             
                     elif '9F' in user_msg:
                         response_sent_text = get_ulam('9F')
