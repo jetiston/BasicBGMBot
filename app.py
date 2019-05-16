@@ -78,6 +78,25 @@ def receive_message():
                         
                     #response_sent_text = get_message()
                     send_message(recipient_id, response_sent_text)
+
+                if message['message'].get('postback'):
+                    user_msg = message['message'].get('postback')
+                    print('this is postback')
+                    print(user_msg)
+                    
+                    if '9F' in user_msg:
+                        response_sent_text = get_ulam('9F')
+                        
+                    elif '14F' in user_msg:
+                        response_sent_text = get_ulam('14F')
+                    else:
+                        response_sent_text = 'Gusto mo bang malaman ang ulam today?'
+                        buttons = [{"type": "postback", "title":"Ano meron sa 9F?", "payload": "9F"}, {"type": "postback", "title":"Ano meron sa 14F?", "payload": "14F"}]
+                        bot.send_button_message(recipient_id, response_sent_text, buttons)
+                        
+                    #response_sent_text = get_message()
+                    send_message(recipient_id, response_sent_text)
+
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
                     response_sent_nontext = get_message()
