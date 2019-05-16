@@ -1,18 +1,9 @@
 #Python libraries that we need to import for our bot
 import random
 from flask import Flask, request
-from flask_sqlalchemy import SQLAlchemy
-import sys
-import json
-from flask_heroku import Heroku
 from pymessenger.bot import Bot
 import os 
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-heroku = Heroku(app)
-db = SQLAlchemy(app)
-
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 ULAM_9F = os.environ['ULAM_9F']
