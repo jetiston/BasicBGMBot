@@ -33,20 +33,19 @@ def receive_message():
                 if message['message'].get('text'):
                     user_msg = message['message'].get('text')
                     
-                    if '9F' in user_msg:
+                    if 'iamearly' in user_msg:
+                        if '9F' in user_msg:
+                            os.environ['ULAM_9F'] = user_msg.split("iamearly9F",1)[1]
+                        elif '14F' in user_msg:
+                            os.environ['ULAM_14'] = user_msg.split("iamearly14F",1)[1]
+                            
+                        response_sent_text = 'Thanks for the info!'
+                            
+                    elif '9F' in user_msg:
                         response_sent_text = ULAM_9F
                         
                     elif '14F' in user_msg:
                         response_sent_text = ULAM_14F
-                    
-                    elif 'iamearly9F' in user_msg:
-                        os.environ['ULAM_9F'] = user_msg.split("iamearly9F",1)[1]
-                        response_sent_text = 'Thanks for the info!'
-                        
-                    elif 'iamearly14F' in user_msg:
-                        os.environ['ULAM_14'] = user_msg.split("iamearly14F",1)[1]
-                        response_sent_text = 'Thanks for the info!'
-                        
                     else:
                         response_sent_text = 'Aw, walang foods diyan'
                         
