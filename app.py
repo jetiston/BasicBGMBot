@@ -75,7 +75,7 @@ def receive_message():
                         response_sent_text = get_ulam('14F')
                     else:
                         response_sent_text = 'Gusto mo bang malaman ang ulam today?'
-                        buttons = [{"type": "postback", "title":"Ano meron sa 9F?", "payload": "9F"}, {"type": "postback", "title":"Ano meron sa 14F?", "payload": "14F"}]
+                        buttons = [{"type": "postback", "title":"Ano meron sa 9F?", "payload": "09F"}, {"type": "postback", "title":"Ano meron sa 14F?", "payload": "14F"}]
                         bot.send_button_message(recipient_id, response_sent_text, buttons)
                         
                     #response_sent_text = get_message()
@@ -90,9 +90,9 @@ def receive_message():
                 print('this is postback')
                 print(user_msg)
                     
-                if '9F' == user_msg:
-                    response_sent_text = get_ulam('9F')
-                        
+                if '09F' == user_msg:
+                    print('are you there?')
+                    response_sent_text = get_ulam('9F')  
                 elif '14F' == user_msg:
                     response_sent_text = get_ulam('14F')
 
