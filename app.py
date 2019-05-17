@@ -87,16 +87,20 @@ def receive_message():
                 print('this is postback')
                 print(user_msg)
                     
-                if '9F' == user_msg and is_ulam_update('9F'):
+                if '9F' == user_msg and is_ulam_updated('9F'):
                     response_sent_text = get_ulam('9F')
                 elif '9F' == user_msg:
-                    response_sent_text = 
-
-
-                elif '14F' == user_msg:
+                    ask_user_ulam('9F')
+                elif '14F' == user_msg and is_ulam_updated('14F'):
                     response_sent_text = get_ulam('14F')
+                elif '14F' == user_msg:
+                    ask_user_ulam('14F')
+                else:
+                    response_sent_text = 'Not today'
+                
 
-                send_message(recipient_id, response_sent_text)
+                if response_sent_text:
+                    send_message(recipient_id, response_sent_text)
 
     return "Message Processed"
 
@@ -109,7 +113,7 @@ def verify_fb_token(token_sent):
     return 'test'
 
 def ask_user_ulam(floor):
-    response_sent_text = 'Di pa ako update. Alam mo ba ang ulam sa ' + floor + ' ?'
+    response_sent_text = 'Di pa ako updated. Alam mo ba ang ulam sa ' + floor + ' ?'
     buttons = [{"type": "postback", "title":"Yes", "payload": "YES" + floor }, {"type": "postback", "title":"No", "payload": "NO" + floor}]
     bot.send_button_message(recipient_id, response_sent_text, buttons)
 
