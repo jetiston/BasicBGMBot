@@ -60,7 +60,7 @@ def receive_message():
                 if message['message'].get('text') or message['message'].get('attachments'):
                     user_msg = message['message'].get('text')
                     
-                    if user_msg and 'iamearly' in user_msg:
+                    if user_msg and 'ulampare' in user_msg:
                         if '9F' in user_msg:
                             #input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
                             response_sent_text = update_ulam('9F', today, user_msg.split('iamearly',1)[-1].strip())
@@ -90,11 +90,19 @@ def receive_message():
                 if '9F' == user_msg and is_ulam_updated('9F'):
                     response_sent_text = get_ulam('9F')
                 elif '9F' == user_msg:
-                    ask_user_ulam('9F')
+                    ask_user_ulam('9F', recipient_id)
                 elif '14F' == user_msg and is_ulam_updated('14F'):
                     response_sent_text = get_ulam('14F')
                 elif '14F' == user_msg:
-                    ask_user_ulam('14F')
+                    ask_user_ulam('14F', recipient_id)
+                elif 'YES9F' == user_msg:
+                    response_sent_text = 'Type \'9F ulampare <space> <anong mga ulam today>\''
+
+                elif 'YES14F' == user_msg:
+                    response_sent_text = 'Type \'14F ulampare <space> <anong mga ulam today>\''
+
+                elif 'NO' in user_msg:
+                    response_sent_text = 'Punta ka muna sa pantry update mo kami ;)'
                 else:
                     response_sent_text = 'Not today'
                 
@@ -112,7 +120,7 @@ def verify_fb_token(token_sent):
         return request.args.get("hub.challenge")
     return 'test'
 
-def ask_user_ulam(floor):
+def ask_user_ulam(floor, recipient_id):
     response_sent_text = 'Di pa ako updated. Alam mo ba ang ulam sa ' + floor + ' ?'
     buttons = [{"type": "postback", "title":"Yes", "payload": "YES" + floor }, {"type": "postback", "title":"No", "payload": "NO" + floor}]
     bot.send_button_message(recipient_id, response_sent_text, buttons)
