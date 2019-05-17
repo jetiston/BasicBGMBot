@@ -86,6 +86,8 @@ def receive_message():
                 user_msg = message['postback']['payload']
                 print('this is postback')
                 print(user_msg)
+
+                response_sent_text = False
                     
                 if '9F' == user_msg and is_ulam_updated('9F'):
                     response_sent_text = get_ulam('9F')
