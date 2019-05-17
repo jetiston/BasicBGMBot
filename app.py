@@ -81,21 +81,17 @@ def receive_message():
                         buttons = [{"type": "postback", "title":"Ano meron sa 9F?", "payload": "9F"}, {"type": "postback", "title":"Ano meron sa 14F?", "payload": "14F"}]
                         bot.send_button_message(recipient_id, response_sent_text, buttons)
                         
-                    #response_sent_text = get_message()
-                    
-
-                #if user sends us a GIF, photo,video, or any other non-text item
-                #if message['message'].get('attachments'):
-                    #response_sent_nontext = get_message()
-                    #send_message(recipient_id, response_sent_nontext)
 
             elif message.get('postback'):
                 user_msg = message['postback']['payload']
                 print('this is postback')
                 print(user_msg)
                     
-                if '9F' == user_msg:
+                if '9F' == user_msg and is_ulam_update('9F'):
                     response_sent_text = get_ulam('9F')
+                elif '9F' == user_msg:
+                    response_sent_text = 
+
 
                 elif '14F' == user_msg:
                     response_sent_text = get_ulam('14F')
@@ -111,6 +107,11 @@ def verify_fb_token(token_sent):
     if token_sent == VERIFY_TOKEN:
         return request.args.get("hub.challenge")
     return 'test'
+
+def ask_user_ulam(floor):
+    response_sent_text = 'Di pa ako update. Alam mo ba ang ulam sa ' + floor + ' ?'
+    buttons = [{"type": "postback", "title":"Yes", "payload": "YES" + floor }, {"type": "postback", "title":"No", "payload": "NO" + floor}]
+    bot.send_button_message(recipient_id, response_sent_text, buttons)
 
 def get_ulam(floor):
     pantry = Ulamentry.query.filter_by(floor=floor).first()
@@ -147,10 +148,10 @@ def update_ulam(floor, date, ulam):
     return reply
 
 #chooses a random message to send to the user
-def get_message():
-    sample_responses = ["You are stunning!", "We're proud of you.", "Keep on being you!", "We're greatful to know you :)"]
+#def get_message():
+    #sample_responses = ["You are stunning!", "We're proud of you.", "Keep on being you!", "We're greatful to know you :)"]
     # return selected item to the user
-    return random.choice(sample_responses)
+    #return random.choice(sample_responses)
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
