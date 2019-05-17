@@ -57,7 +57,7 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 
                 
-                if message['message'].get('text'):
+                if message['message'].get('text') or message['message'].get('attachments'):
                     user_msg = message['message'].get('text')
                     
                     if 'iamearly' in user_msg:
@@ -85,9 +85,10 @@ def receive_message():
                     
 
                 #if user sends us a GIF, photo,video, or any other non-text item
-                if message['message'].get('attachments'):
-                    response_sent_nontext = get_message()
-                    send_message(recipient_id, response_sent_nontext)
+                #if message['message'].get('attachments'):
+                    #response_sent_nontext = get_message()
+                    #send_message(recipient_id, response_sent_nontext)
+
             elif message.get('postback'):
                 user_msg = message['postback']['payload']
                 print('this is postback')
