@@ -60,7 +60,7 @@ def receive_message():
                 if message['message'].get('text') or message['message'].get('attachments'):
                     user_msg = message['message'].get('text')
                     
-                    if 'iamearly' in user_msg:
+                    if user_msg and 'iamearly' in user_msg:
                         if '9F' in user_msg:
                             #input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
                             response_sent_text = update_ulam('9F', today, user_msg.split('iamearly',1)[-1].strip())
@@ -69,11 +69,11 @@ def receive_message():
                             response_sent_text = update_ulam('14F', today, user_msg.split('iamearly',1)[-1].strip())
                         send_message(recipient_id, response_sent_text)
                     
-                    elif '9F' in user_msg:
+                    elif user_msg and '9F' in user_msg:
                         response_sent_text = get_ulam('9F')
                         send_message(recipient_id, response_sent_text)
                         
-                    elif '14F' in user_msg:
+                    elif user_msg and '14F' in user_msg:
                         response_sent_text = get_ulam('14F')
                         send_message(recipient_id, response_sent_text)
                     else:
@@ -116,6 +116,17 @@ def get_ulam(floor):
     pantry = Ulamentry.query.filter_by(floor=floor).first()
     ulam = pantry.ulam
     date = pantry.date
+
+    reply = 'Ang ulam today(' + date + ') sa ' + floor + ' ay ' + ulam
+    return reply
+
+def is_ulam_updated(floor):
+    pantry = Ulamentry.query.filter_by(floor=floor).first()
+    
+    if pantry.date == today:
+        return True
+    else:
+        return False
 
     reply = 'Ang ulam today(' + date + ') sa ' + floor + ' ay ' + ulam
     return reply
