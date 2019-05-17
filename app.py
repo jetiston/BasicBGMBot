@@ -63,10 +63,10 @@ def receive_message():
                     if user_msg and 'ulampare' in user_msg:
                         if '9F' in user_msg:
                             #input_ulam = Ulamentry('9F', '20190516', user_msg.split('iamearly',1)[-1].strip())
-                            response_sent_text = update_ulam('9F', today, user_msg.split('iamearly',1)[-1].strip())
+                            response_sent_text = update_ulam('9F', today, user_msg.split('ulampare',1)[-1].strip())
                         elif '14F' in user_msg:
                             #input_ulam = Ulamentry('14F', '20190516', user_msg.split('iamearly',1)[-1].strip())
-                            response_sent_text = update_ulam('14F', today, user_msg.split('iamearly',1)[-1].strip())
+                            response_sent_text = update_ulam('14F', today, user_msg.split('ulampare',1)[-1].strip())
                         send_message(recipient_id, response_sent_text)
                     
                     elif user_msg and '9F' in user_msg:
